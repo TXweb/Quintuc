@@ -1,0 +1,31 @@
+parameters:
+    checkMissingIterableValueType: true
+    polluteScopeWithLoopInitialAssignments: false
+    polluteScopeWithAlwaysIterableForeach: false
+    checkAlwaysTrueInstanceof: true
+    checkExplicitMixedMissingReturn: true
+    checkFunctionNameCase: true
+    reportMaybesInMethodSignatures: true
+    reportStaticMethodSignatures: true
+
+rules:
+	- PHPStan\Rules\Classes\RequireParentConstructCallRule
+	- PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule
+	- PHPStan\Rules\Methods\WrongCaseOfInheritedMethodRule
+	- PHPStan\Rules\Operators\OperandInArithmeticPostDecrementRule
+	- PHPStan\Rules\Operators\OperandInArithmeticPostIncrementRule
+	- PHPStan\Rules\Operators\OperandInArithmeticPreDecrementRule
+	- PHPStan\Rules\Operators\OperandInArithmeticPreIncrementRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticAdditionRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticDivisionRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticExponentiationRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticModuloRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticMultiplicationRule
+	- PHPStan\Rules\Operators\OperandsInArithmeticSubtractionRule
+	- PHPStan\Rules\StrictCalls\DynamicCallOnStaticMethodsRule
+	- PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
+	- PHPStan\Rules\SwitchConditions\MatchingTypeInSwitchCaseConditionRule
+
+services:
+	-
+		class: PHPStan\Rules\Operators\OperatorRuleHelper
