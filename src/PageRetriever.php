@@ -39,12 +39,14 @@ final class PageRetriever
                 return;
             }
 
-            $this->retrieve($page);
-            $numRetrieved++;
+            if ($this->retrieve($page))
+            {
+                $numRetrieved++;
+            }
         }
     }
 
-    private function retrieve(string $page): void
+    private function retrieve(string $page): bool
     {
         if ($this->pageMustBeRetrieved($page))
         {
@@ -52,11 +54,11 @@ final class PageRetriever
             $pageDataRaw = $this->restRetriever->retrieve($url);
             $pageData = json_decode($pageDataRaw, true);
             file_put_contents($this->getFilename($page), $pageData['source']);
+            return true;
         }
-        else
-        {
-            echo "Reading {$page} from cache...\n";
-        }
+
+        echo "Reading {$page} from cache...\n";
+        return false;
     }
 
     private function pageMustBeRetrieved(string $page): bool
