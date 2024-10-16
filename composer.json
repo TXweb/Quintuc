@@ -1,5 +1,6 @@
 {
     "name": "txweb/quintuc",
+    "description": "Project to gather statistics for the Zealandic Wiktionary",
     "type": "project",
     "license": "MIT",
     "autoload": {
