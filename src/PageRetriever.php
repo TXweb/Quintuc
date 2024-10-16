@@ -50,6 +50,7 @@ final class PageRetriever
     {
         if ($this->pageMustBeRetrieved($page))
         {
+            echo "Downloading {$page}...\n";
             $url = self::PAGE_DATA_URL_PREFIX . RestRetriever::urlencodeForRest($page);
             $pageDataRaw = $this->restRetriever->retrieve($url);
             $pageData = json_decode($pageDataRaw, true);
@@ -74,7 +75,14 @@ final class PageRetriever
             return true;
         }
 
-        // check date!
+        $mtime = filemtime($filename);
+        $cutoff = strtotime('-6 days');
+
+        if ($mtime < $cutoff)
+        {
+            return true;
+        }
+
         return false;
     }
 
