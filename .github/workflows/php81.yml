@@ -33,10 +33,8 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
-      # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-      # Docs: https://getcomposer.org/doc/articles/scripts.md
-#      - name: Run PHPStan
-#        run: composer run-script phpstan
+      - name: Run PHPStan
+        run: composer run-script phpstan
 
       - name: Run PHP Coding Standards Fixer
         run: composer run-script cs-check
