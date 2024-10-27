@@ -8,6 +8,8 @@ use function file_exists;
 use function file_put_contents;
 use function json_decode;
 use function sha1;
+use function filemtime;
+use function strtotime;
 
 final class PageRetriever
 {
@@ -15,11 +17,6 @@ final class PageRetriever
     private const PAGE_DATA_URL_PREFIX = 'https://incubator.wikimedia.org/w/rest.php/v1/page/';
 
     private RestRetriever $restRetriever;
-
-    /**
-     * @var array<string, \DateTimeImmutable>
-     */
-    private array $wiktionaryUpdateDates = [];
 
     public function __construct()
     {
@@ -53,8 +50,12 @@ final class PageRetriever
             echo "Downloading {$page}...\n";
             $url = self::PAGE_DATA_URL_PREFIX . RestRetriever::urlencodeForRest($page);
             $pageDataRaw = $this->restRetriever->retrieve($url);
+            /** @var array{ source: string }|false $pageData */
             $pageData = json_decode($pageDataRaw, true);
-            file_put_contents($this->getFilename($page), $pageData['source']);
+            if ($pageData !== false)
+            {
+                file_put_contents($this->getFilename($page), $pageData['source']);
+            }
             return true;
         }
 

@@ -17,8 +17,7 @@ use function str_starts_with;
 
 final class Indexer
 {
-    const PAGES_OVERVIEW_URL = 'https://incubator.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Wt%2Fzea&format=json&cmlimit=500';
-    const UPDATE_DATES_URL = 'https://incubator.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Wt%2Fzea&format=json&cmlimit=500';
+    private const PAGES_OVERVIEW_URL = 'https://incubator.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Wt%2Fzea&format=json&cmlimit=500';
 
     private const PAGES_TO_EXCLUDE = [
         'Wt/zea/Vòblad', // Main page
@@ -54,6 +53,9 @@ final class Indexer
             {
                 throw new RuntimeException("Could not retrieve from {$url}!");
             }
+            /**
+             * @var array{ continue?: array{ cmcontinue: string }, query: array{ categorymembers: list<array{ pageid: string, title: string }> } } $result
+             */
             $result = json_decode($resultRaw, true, flags: JSON_THROW_ON_ERROR);
 
             foreach ($result['query']['categorymembers'] as $page)
