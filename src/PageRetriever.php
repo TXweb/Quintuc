@@ -13,7 +13,7 @@ use function strtotime;
 
 final class PageRetriever
 {
-    private const MAX_REQUESTS_PER_HOUR = 350;
+    private const MAX_REQUESTS_PER_HOUR = 450;
     private const PAGE_DATA_URL_PREFIX = 'https://incubator.wikimedia.org/w/rest.php/v1/page/';
 
     private RestRetriever $restRetriever;
