@@ -40,6 +40,7 @@ final class LanguageCounter
         'Wt/zea/qkl' => 'Kleverlands',
         'Wt/zea/qov' => 'Oôst-Vlaems',
         'Wt/zea/qsf' => 'Stasvries en verwanten',
+        'Wt/zea/ru' => 'Russisch',
         'Wt/zea/skw' => 'Skepi',
         'Wt/zea/sv' => 'Zweeds',
         'Wt/zea/vls' => 'West-Vlaems',
