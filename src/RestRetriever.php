@@ -11,6 +11,7 @@ final class RestRetriever
 {
     public function retrieve(string $url): string
     {
+        ini_set( 'user_agent', 'Quintuc');
         $ret = file_get_contents($url);
         if ($ret === false)
         {

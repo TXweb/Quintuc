@@ -6,7 +6,6 @@ namespace TXweb\Quintuc;
 use RuntimeException;
 use function array_key_exists;
 use function fclose;
-use function file_get_contents;
 use function fopen;
 use function fwrite;
 use function in_array;
@@ -47,12 +46,8 @@ final class Indexer
                 $url .= '&cmcontinue=' . RestRetriever::urlencodeForRest($continue);
             }
 
-            $this->restRetriever->retrieve($url);
-            $resultRaw = file_get_contents($url);
-            if ($resultRaw === false)
-            {
-                throw new RuntimeException("Could not retrieve from {$url}!");
-            }
+            $resultRaw = $this->restRetriever->retrieve($url);
+
             /**
              * @var array{ continue?: array{ cmcontinue: string }, query: array{ categorymembers: list<array{ pageid: string, title: string }> } } $result
              */
